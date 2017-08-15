@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import VueResource from 'vue-resource'
-import Hello from '@/components/Hello'
 import MyComponent from '@/components/MyComponent'
 import NavComponent from '@/components/Nav'
 import DashboardComponent from '@/components/Dashboard'
+import LandingComponent from '@/components/Landing'
 
 Vue.use(VueResource)
 Vue.use(Router)
@@ -13,8 +13,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'LandingComponent',
+      component: LandingComponent
     }, {
       path: '/MyComponent',
       name: 'MyComponent',
@@ -27,6 +27,10 @@ export default new Router({
       path: '/DashboardComponent',
       name: 'DashboardComponent',
       component: DashboardComponent
+    }, {
+      path: '/LandingComponent',
+      name: 'LandingComponent',
+      component: LandingComponent
     }
   ]
 })

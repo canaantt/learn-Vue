@@ -4,7 +4,7 @@
     <button class="btn btn-primary" v-on:click="getDatasets()">Get All the Datasets</button>
     <ul>
         <li v-for="item in datasets">
-            {{ item }}
+            {{ item.Name }}
         </li>
     </ul>
   </div>
@@ -21,13 +21,16 @@ export default {
   },
   methods: {
     getDatasets: function () {
-        this.$http
-          .get('http://localhost:3000/projects', (data) => {
-            this.datasets = data;
+      this.$http
+          .get('http://localhost:3000/projects')
+          .then(function (data) {
+            this.datasets = data.body
           })
-          .error((err) => console.log(err))
-      }
+          .error(function (err) {
+            console.log(err)
+          })
     }
+  }
 }
 </script>
 
