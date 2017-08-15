@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     gotoDashboard: function () {
-      this.Route.push('/DashboardComponent')
+      this.$router.push('/DashboardComponent')
     }
   }
 }
