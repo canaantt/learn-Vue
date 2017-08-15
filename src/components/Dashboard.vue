@@ -22,12 +22,9 @@ export default {
   methods: {
     getDatasets: function () {
       this.$http
-          .get('http://localhost:3000/projects')
+          .get('http://localhost:3000/projects', function (err) { console.log(err) })
           .then(function (data) {
             this.datasets = data.body
-          })
-          .error(function (err) {
-            console.log(err)
           })
     }
   }
