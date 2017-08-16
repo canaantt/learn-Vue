@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <!--<h1>[ Hover Here ↓ ]</h1>-->
+    <app-header></app-header>
     <div class="parent">
       <div class="child">
         <!-- <img src="http://rs1183.pbsrc.com/albums/x472/anoccasionaldream/Tumblr%20Photos/roses-vintage.jpg~c200" alt="" width="200" height=" 200" />
@@ -20,8 +21,12 @@
 </template>
 
 <script>
+import NavComponent from '@/components/Nav'
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    appHeader: NavComponent
+  }
 }
 </script>
 
@@ -32,7 +37,7 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+    margin-top: 0px;
   }
   * {
     box-sizing: border-box;
@@ -41,7 +46,7 @@ export default {
     overflow-X: hidden
   }
   body {
-    background: #804b8c
+    background: #FFF
   }
   h1 {
     text-align: center;
@@ -51,7 +56,7 @@ export default {
     margin-top: 50px
   }
   .parent {
-    width: 608px;
+    width: 1000px;
     height: 204px;
     margin: 20px auto;
     overflow: hidden

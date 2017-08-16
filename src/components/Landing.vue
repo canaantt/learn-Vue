@@ -1,7 +1,10 @@
 <template>
   <div class="LandingComponent">
     <h1>{{mymsg}}</h1>
-    <button class="btn btn-primary" v-on:click="gotoDashboard()">Dashboard</button>
+    <h3>This is a fun demo project to learn VueJS v2 using <a href="https://github.com/pagekit/vue-resource" target="_blank">vue-resource</a>, 
+    <a href="https://github.com/vuejs/vuex" target="_blank">vuex</a>, 
+    <a href="https://github.com/vuejs/vue-router" target="_blank">vue-router</a></h3>
+    <p>The source: Udemy</p>
   </div>
 </template>
 
@@ -26,6 +29,7 @@ export default {
 <style scoped>
 h1, h2 {
   font-weight: normal;
+  color: #42b983;
 }
 
 ul {

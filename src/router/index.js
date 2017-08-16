@@ -5,6 +5,7 @@ import MyComponent from '@/components/MyComponent'
 import NavComponent from '@/components/Nav'
 import DashboardComponent from '@/components/Dashboard'
 import LandingComponent from '@/components/Landing'
+import FeedbackComponent from '@/components/Feedback'
 
 Vue.use(VueResource)
 Vue.use(Router)
@@ -31,6 +32,10 @@ export default new Router({
       path: '/LandingComponent',
       name: 'LandingComponent',
       component: LandingComponent
+    }, {
+      path: '/FeedbackComponent',
+      name: 'FeedbackComponent',
+      component: FeedbackComponent
     }
   ]
 })
