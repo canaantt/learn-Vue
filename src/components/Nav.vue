@@ -11,12 +11,12 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li v-if="user">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a id="navbarDropdownMenuLink">
                             <img class="navbar-pic" :src="user.thumbnail" alt="Smiley face">
                         </a>
                     <li>
-                        <button v-if="isLoggedIn" class="btn btn-danger log" @click="googleLogout()">Log out </button>
-                        <button v-if="!isLoggedIn" class="btn btn-info log" @click="googleLogin()">Log In</button>
+                        <button v-if="isLoggedIn" class="btn btn-danger log navbar-items" @click="googleLogout()">Log out </button>
+                        <button v-if="!isLoggedIn" class="btn btn-info log navbar-items" @click="googleLogin()">Log In</button>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -164,7 +164,7 @@ navbar {
     height: 40px;
     border-radius: 50%;
     margin-left: 10px;
-    margin-right: 60px;
+    margin-right: 10px;
     cursor: pointer;
 }
 
