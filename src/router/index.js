@@ -29,7 +29,7 @@ export default new Router({
       name: 'DashboardComponent',
       component: DashboardComponent
     }, {
-      path: '/LandingComponent',
+      path: '/landing',
       name: 'LandingComponent',
       component: LandingComponent
     }, {

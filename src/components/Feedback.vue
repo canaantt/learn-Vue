@@ -1,6 +1,7 @@
 <template>
   <div class="FeedBackComponent">
     <h1>{{mymsg}}</h1>
+    <p></p>
   </div>
 </template>
 
