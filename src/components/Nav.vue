@@ -61,11 +61,13 @@
           hello.logout('google', {})
         },
         setUser: function (data) {
+          alert('here!')
           this.$state.commit('getUser', data)
           console.log(data.email)
         }
       },
       created: function () {
+        const self = this
         hello.init({
           google: '1098022410981-i511q2bdvm3tb254b3ulmqn7mneb0qkp.apps.googleusercontent.com'
         }, {
@@ -73,10 +75,10 @@
           redirect_uri: '/landing'
         })
         hello.on('auth.login', function () {
-          hello('google').api('me').then(function (data) {
-            alert(data.email)
-            this.setUser(data)
-          })
+          hello('google').api('me')
+                         .then((data) => {
+                           self.$store.commit('getUser', data)
+                         })
         })
         hello.on('auth.logout', function () { alert('auth.logout!') })
         hello.on('auth.change', function () { alert('state changed!') })
