@@ -7,6 +7,12 @@ import { store } from './store/store'
 import * as hello from 'hellojs'
 
 Vue.config.productionTip = false
+Vue.filter('date-formate-time', function (value) {
+  const d = value.split('T')
+  const d1 = d[0].split('-')
+  const d2 = d[1].substr(0, 8)
+  return d1[1] + '/' + d1[2] + '/' + d1[0] + ' ' + d2
+})
 
 /* eslint-disable no-new */
 new Vue({

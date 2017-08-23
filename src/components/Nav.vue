@@ -14,6 +14,7 @@
                         <a id="navbarDropdownMenuLink">
                             <img class="navbar-pic" :src="user.thumbnail" alt="Smiley face">
                         </a>
+                    </li>
                     <li>
                         <button v-if="isLoggedIn" class="btn btn-danger log navbar-items" @click="googleLogout()">Log out </button>
                         <button v-if="!isLoggedIn" class="btn btn-info log navbar-items" @click="googleLogin()">Log In</button>
@@ -44,14 +45,6 @@
         }
       },
       methods: {
-        handleLogin: function () {
-          console.log('Logging In...')
-          this.$store.dispatch('getUser')
-        },
-        handleLogout: function () {
-          console.log('Logging Out...')
-          this.$store.commit('removeUser')
-        },
         googleLogin: function () {
           hello.login('google', {
             display: 'popup',
@@ -62,9 +55,9 @@
         },
         googleLogout: function () {
           hello.logout('google', {})
+          this.$router.push('/landing')
         },
         setUser: function (data) {
-          alert('here!')
           this.$state.commit('getUser', data)
           console.log(data.email)
         }
@@ -84,7 +77,6 @@
                          })
         })
         hello.on('auth.logout', function () {
-          alert('auth.logout!')
           self.$store.commit('getUser', null)
         })
         hello.on('auth.change', function () { alert('state changed!') })
@@ -97,82 +89,82 @@
   @import '../index.scss' 
 </style>
 <style lang='css'>
-navbar {
-    border: none;
-    box-shadow: 0 2px 3px $color-gray;
-    font-family: $font-family;
-    font-weight: $font-weight;
-}
-
-.navbar-logo-img {
-    max-height: 40px;
-    image-rendering: crisp-edges;
-    margin-right: 10px;
-    margin-left: 60px;
-}
-
-.navbar-logo-text {
-    font-size: 18px;
-    line-height: 40px;
-    vertical-align: middle;
-    color: $color-white;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-}
-
-.navbar-inverse {
-    border: none;
-    background-color: $color-onco-blue;
-}
-
-.navbar-inverse .navbar-toggle {
-    border: none
-}
-
-.navbar-items {
-    padding-right: 5px;
-    color: #fff;
-    margin-top: 12px;
-    font-size: 14px;
-    cursor: pointer;
-    span {
-        margin-right: 5px;
-        color: #fff;
+    navbar {
+        border: none;
+        box-shadow: 0 2px 3px $color-gray;
+        font-family: $font-family;
+        font-weight: $font-weight;
     }
-}
 
-// removing bootstrap carat over photo
-.dropdown-toggle::after {
-    display: none
-}
+    .navbar-logo-img {
+        max-height: 40px;
+        image-rendering: crisp-edges;
+        margin-right: 10px;
+        margin-left: 60px;
+    }
 
-.navbar-inverse .navbar-collapse,
-.navbar-inverse .navbar-form {
-    border-color: #0383c2;
-}
+    .navbar-logo-text {
+        font-size: 18px;
+        line-height: 40px;
+        vertical-align: middle;
+        color: $color-white;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+    }
 
-.navbar-inverse .navbar-toggle {
-    border-color: #fff;
-}
+    .navbar-inverse {
+        border: none;
+        background-color: $color-onco-blue;
+    }
 
-.navbar-inverse .navbar-nav>li>a {
-    color: $color-white;
-}
+    .navbar-inverse .navbar-toggle {
+        border: none
+    }
 
-.navbar-pic {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-left: 10px;
-    margin-right: 10px;
-    cursor: pointer;
-}
+    .navbar-items {
+        padding-right: 5px;
+        color: #fff;
+        margin-top: 12px;
+        font-size: 14px;
+        cursor: pointer;
+        span {
+            margin-right: 5px;
+            color: #fff;
+        }
+    }
 
-.dropdown-item {
-    font-size: 12px;
-}
+    // removing bootstrap carat over photo
+    .dropdown-toggle::after {
+        display: none
+    }
 
-.dropdown-menu {
-    min-width: 8rem;
-}
+    .navbar-inverse .navbar-collapse,
+    .navbar-inverse .navbar-form {
+        border-color: #0383c2;
+    }
+
+    .navbar-inverse .navbar-toggle {
+        border-color: #fff;
+    }
+
+    .navbar-inverse .navbar-nav>li>a {
+        color: $color-white;
+    }
+
+    .navbar-pic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-left: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    .dropdown-item {
+        font-size: 12px;
+    }
+
+    .dropdown-menu {
+        min-width: 8rem;
+    }
 </style>

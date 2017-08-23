@@ -3,14 +3,14 @@
     <h1>{{mymsg}}</h1>
     <!-- <button class="btn btn-primary" v-on:click="getDatasets()">Get All the Datasets</button>
     <button class="btn btn-primary" v-on:click="gotoLanding()">Landing</button> -->
-    <input type="text" v-on:input="searchProject">
-    <p> {{projectName}}</p>
+    <input type="text" v-model="filterText">
+    <p> {{filterText}}</p>
     <!-- <p v-on:mousemove="updateCoordinates($event)">
       Coordinates: {{x}}/{{y}}
       - <span v-on:mousemove.prevent="">Dead Spot</span>
     </p> -->
     <ul>
-        <li v-for="item in datasets">
+        <li v-for="item in filteredDatasets">
           <div class="col-md-12">
             <div class="panel panel-success">
               <div class="panel-heading">
@@ -19,12 +19,15 @@
                   </h3>
               </div>
               <div class="panel-body">
-                  <div class="pull-right">
-                      <p>{{ item.Description }}</p>
-                  </div>
                   <div class="pull-left">
-                      <button class="btn btn-success" @click="ProjectDetail()">Edit</button>
-                      <button class="btn btn-success">Delete</button>
+                      <p>{{ item.Description }}</p>
+                      <span>Created Time: {{ item.Date | date-formate-time }}</span>
+                  </div>
+                  <div class="pull-right">
+                    <ul>
+                      <li><button class="btn btn-success" @click="ProjectDetail()">Edit</button></li>
+                      <li><button class="btn btn-success">Delete</button></li>
+                    </ul>
                   </div>
               </div>
             </div>
@@ -35,31 +38,23 @@
 </template>
 
 <script>
+import { datasetsMixin } from '../services/datasetsMixin'
+import projectService from '../services/projects.service'
 export default {
   name: 'DashboardComponent',
-  data () {
-    return {
-      mymsg: 'DashboardComponent Component',
-      datasets: [],
-      projectName: '',
-      x: '',
-      y: ''
+  mixins: [datasetsMixin],
+  filters: {
+    extractDate (value) {
+      console.log('in dashboard local filter')
+      const d = value.split('T')
+      const d1 = d[0].split('-')
+      return d1[1] + '/' + d1[2] + '/' + d1[0]
     }
   },
   methods: {
     getDatasets: function () {
-      this.$http
-          .get('http://localhost:3000/projects', function (err) { console.log(err) })
-          .then(function (data) {
-            this.datasets = data.body
-          })
-    },
-    ProjectDetail: function () {
-      this.$http
-          .get('http://localhost:3000/projects', function (err) { console.log(err) })
-          .then(function (data) {
-            this.datasets = data.body
-          })
+      projectService.getProjects()
+                    .then(data => { this.datasets = data })
     },
     searchProject: function (event) {
       this.projectName = event.target.value
@@ -70,11 +65,7 @@ export default {
     }
   },
   created () {
-    this.$http
-          .get('http://localhost:3000/projects', function (err) { console.log(err) })
-          .then(function (data) {
-            this.datasets = data.body
-          })
+    this.getDatasets()
   }
 }
 </script>
