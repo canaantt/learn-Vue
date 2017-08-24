@@ -48,11 +48,8 @@ export default {
   },
   methods: {
     getDatasets: function () {
-      this.$http
-          .get('http://localhost:3000/projects', function (err) { console.log(err) })
-          .then(function (data) {
-            this.datasets = data.body
-          })
+      this.datasets = this.$store.state.projects
+      console.log('in dashboard this, datasets is ', this.datasets)
     },
     ProjectDetail: function () {
       this.$http
@@ -71,7 +68,7 @@ export default {
   },
   created () {
     this.$store.dispatch('projectsService')
-    this.datasets = this.$store.projects
+    this.getDatasets()
   }
 }
 </script>

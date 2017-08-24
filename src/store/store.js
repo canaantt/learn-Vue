@@ -24,8 +24,8 @@ export const store = new Vuex.Store({
     removeUser: state => {
       state.user = null
     },
-    setProjects: state => {
-      this.projects = []
+    setProjects: (state, payload) => {
+      state.projects = payload
     }
   },
   actions: {
@@ -34,9 +34,10 @@ export const store = new Vuex.Store({
       commit('getUser', payload)
     },
     projectsService: ({commit}) => {
-      this.$http.get('localhost:3000/projects')
+      Vue.http.get('http://localhost:3000/projects')
           .then(function (data) {
-            commit('setProjects', data)
+            console.log(data.body)
+            commit('setProjects', data.body)
           })
     }
   }
