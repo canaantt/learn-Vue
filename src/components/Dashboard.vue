@@ -3,8 +3,12 @@
     <h1>{{mymsg}}</h1>
     <!-- <vega-lite :data="values" mark="bar" :encoding="encoding"/>
     <button class="but btn-primary" v-on:click="refreshNumbers()">Refresh</button> -->
+    <!-- <div>
+      <multiselect v-model="mark" :options="options" :searchable="true" :close-on-select="true" :show-labels="true" placeholder="Pick a mark"></multiselect>
+      <vega-lite :data="data" :mark="mark" :encoding="encoding"></vega-lite>
+    </div> -->
     <div>
-      <multiselect v-model="mark" :options="availableMarks" :searchable="true" :close-on-select="true" :show-labels="true" placeholder="Pick a mark"></multiselect>
+      <multiselect :options="options" :multiple="true" :close-on-select="true" label="name" track-by="name" @select="addEncodingChannel" @remove="removeEncodingChannel"></multiselect>
       <vega-lite :data="data" :mark="mark" :encoding="encoding"></vega-lite>
     </div>
     <!-- <button class="btn btn-primary" v-on:click="getDatasets()">Get All the Datasets</button>
@@ -57,11 +61,31 @@ export default {
       //   {a: 'G', b: 19}, {a: 'H', b: 87}, {a: 'I', b: 52}
       // ],
       encoding: {
-        x: {field: 'days_to_death', type: 'quantitative'},
-        y: {field: 'age_at_diagnosis', type: 'quantitative'}
+        x: {field: 'age_at_diagnosis', type: 'quantitative'},
+        y: {field: 'days_to_death', type: 'quantitative'}
       },
       mark: 'point',
-      availableMarks: ['bar', 'point', 'circle', 'line']
+      // availableMarks: ['bar', 'point', 'circle', 'line'],
+      options: [
+        {
+          name: 'Origin - Color',
+          channel: {
+            color: {field: 'gender', type: 'nominal'}
+          }
+        },
+        {
+          name: 'Origin - Shape',
+          channel: {
+            shape: {field: 'race', type: 'nominal'}
+          }
+        },
+        {
+          name: 'Displacement - Opacity',
+          channel: {
+            opacity: {field: 'KPS', type: 'quantitative'}
+          }
+        }
+      ]
     }
   },
   methods: {
@@ -92,17 +116,16 @@ export default {
       const channel = newOption.channel
       const channelName = Object.keys(channel).pop()
       const channelVal = Object.values(channel).pop()
-      this.set(this.encoding, channelName, channelVal)
+      this.$set(this.encoding, channelName, channelVal)
     },
     removeEncodingChannel (option) {
       const channel = option.channel
       const channelName = Object.keys(channel).pop()
-      this.delete(this.encoding, channelName)
+      this.$delete(this.encoding, channelName)
     },
     getJson (resource) {
       this.$http.get('http://dev.oncoscape.sttrcancer.io/api/gbm_diagnosis/?q=&apikey=password').then((response) => {
         this.data = response.data
-        console.log('this.data is: ', this.data)
       })
     }
   },
