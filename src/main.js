@@ -5,7 +5,10 @@ import App from './App'
 import router from './router'
 import { store } from './store/store'
 import * as hello from 'hellojs'
-
+import VueVega from 'vue-vega'
+import Multiselect from 'vue-multiselect'
+Vue.use(VueVega)
+Vue.component(Multiselect)
 Vue.config.productionTip = false
 Vue.filter('date-formate-time', function (value) {
   const d = value.split('T')

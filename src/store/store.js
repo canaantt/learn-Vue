@@ -19,7 +19,6 @@ export const store = new Vuex.Store({
   mutations: {
     getUser: (state, payload) => {
       state.user = payload
-      console.log('in mutation getUser', state.user)
     },
     removeUser: state => {
       state.user = null
@@ -30,13 +29,11 @@ export const store = new Vuex.Store({
   },
   actions: {
     setUser: ({commit}, payload) => {
-      console.log('in actions: getUser', payload.email)
       commit('getUser', payload)
     },
     projectsService: ({commit}) => {
       Vue.http.get('http://localhost:3000/projects')
           .then(function (data) {
-            console.log(data.body)
             commit('setProjects', data.body)
           })
     }
